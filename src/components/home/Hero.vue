@@ -11,7 +11,7 @@
 						</div>
 						<div class="col">
 							<h1>Blok Host</h1>
-							<h2><span class="mover">{{word}}</span> Web Hosting</h2>
+							<h2><span class="mover">{{ word }}</span> Web Hosting</h2>
 
 							<p class="mt-3">Powered by the Solana blockchain & Shadow Drive Layer-2 Storage</p>
 						</div>
@@ -22,21 +22,27 @@
 						<h3 class="text-uppercase text-center my-5">as easy as 1,2,3!</h3>
 						<div class="row">
 							<div class="col-4 text-center">
-								<h4>1. Upload Site</h4>
+								<div class="p-3">
+									<i class="fa fa-upload fa-5x"></i>
+								</div>
+								<h4 class="mt-3">1. Upload Site</h4>
 								<p class="small">Upload your sites files to the shadow drive</p>
-								<img alt="" src="@/assets/images/icon_windows.png" class="img-thumbnail w-75">
 							</div>
 
 							<div class="col-4 text-center">
-								<h4>2. Register Domain</h4>
+								<div class="p-3">
+									<i class="fa fa-globe fa-5x"></i>
+								</div>
+								<h4 class="mt-3">2. Register Domain</h4>
 								<p class="small">Register a predictable domain hash or custom subdomain</p>
-								<img alt="" src="@/assets/images/icon_windows.png" class="img-thumbnail w-75">
 							</div>
 
 							<div class="col-4 text-center">
-								<h4>3. View Site</h4>
+								<div class="p-3">
+									<i class="fa fa-mouse-pointer fa-5x"></i>
+								</div>
+								<h4 class="mt-3">3. View Site</h4>
 								<p class="small">Your site is now available for eternity!</p>
-								<img alt="" src="@/assets/images/icon_windows.png" class="img-thumbnail w-75">
 							</div>
 
 						</div>
@@ -92,6 +98,6 @@ export default {
 }
 
 .img-thumbnail {
-	background: rgba(0,0,0,0.8);
+	background: rgba(0, 0, 0, 0.8);
 }
 </style>
