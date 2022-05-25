@@ -68,7 +68,7 @@
 					</label>
 				</div>
 
-				<button :disabled="!termsAgreed" class="btn btn-outline-primary btn-lg mt-3">HOST SITE</button>
+				<button :disabled="!termsAgreed" class="btn btn-outline-primary btn-lg mt-5 text-white">HOST SITE</button>
 			</div>
 		</div>
 	</section>
@@ -161,5 +161,9 @@ export default {
 .bordered {
 	border: 1px solid white;
 	border-radius: 9px;
+}
+
+.btn-outline-primary:not(:disabled) {
+	box-shadow: 0 0 30px rgb(10 159 185);
 }
 </style>
