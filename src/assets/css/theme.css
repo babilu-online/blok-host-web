@@ -1,8 +1,162 @@
 html, body {
+	font-family: 'Roboto', monospace;
 	background: black;
 }
 
 .card {
 	background: rgba(0, 0, 0, 0.2);
 	border: 1px solid white;
+}
+
+
+.token-logo {
+	border-radius: 33px;
+	height: 32px;
+}
+
+.small.token-logo {
+	height: 1.2em;
+}
+
+.noselect {
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.text-blue {
+	color: #0a9fb9;
+}
+
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 4.5em;
+	height: 2.2em;
+}
+
+.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border: 2px solid #6c757d;
+	background-color: transparent;
+	color: white;
+	-webkit-transition: .4s;
+	transition: .4s;
+}
+
+.slider:before {
+	position: absolute;
+	content: "";
+	height: 1.5em;
+	width: 1.5em;
+	left: 4px;
+	bottom: 3px;
+	background-color: white;
+	-webkit-transition: .3s;
+	transition: all .3s ease-in-out;
+}
+
+input:checked + .slider {
+	border: 2px solid white;
+	background-color: #0a9fb9;
+}
+
+input:focus + .slider {
+	box-shadow: 0 0 1px #0a9fb9;
+}
+
+input:checked + .slider:before {
+	-webkit-transform: translateX(2.3em);
+	-ms-transform: translateX(2.3em);
+	transform: translateX(2.3em);
+}
+
+/* Rounded sliders */
+.slider.round {
+	border-radius: 14px;
+}
+
+.slider.round:before {
+	border-radius: 50%;
+}
+
+
+
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	box-shadow: unset;
+	border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.68);
+	border-radius: 10px;
+}
+
+
+.alert.alert-warning {
+	border: 2px solid orange;
+	background: transparent;
+	color: orange;
+}
+.alert.alert-success {
+	border: 2px solid greenyellow;
+	background: transparent;
+	color: greenyellow;
+}
+
+.alert a {
+	color: white;
+}
+
+input.form-control {
+	transition: all 0.3s ease-in-out;
+}
+
+input.form-control:active, input.form-control:focus, textarea.form-control:active, textarea.form-control:focus {
+	box-shadow: none;
+	background: transparent;
+	color: #0084FF;
+	border-bottom: 1px solid #0084FF;
+}
+
+input.form-control:active::placeholder, input.form-control:focus::placeholder, textarea.form-control:focus::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: #0084FF;
+}
+
+.form-control {
+	background: transparent;
+	border: unset;
+	border-bottom: 1px solid white;
+	color: white;
+	border-radius: 0;
+}
+
+.form-control::placeholder {
+	color: white;
+}
+.form-control:disabled, .form-control[readonly] {
+	color: black;
+	background: rgba(255,255,255,0.2);
 }

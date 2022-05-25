@@ -7,6 +7,7 @@
 			<Process></Process>
 			<ViewSite></ViewSite>
 			<RegisterDns></RegisterDns>
+			<Operators></Operators>
 			<Roadmap></Roadmap>
 		</div>
 	</div>
@@ -20,10 +21,12 @@ import UploadSite from "../components/home/UploadSite";
 import ViewSite from "../components/home/ViewSite";
 import RegisterDns from "../components/home/RegisterDns";
 import Roadmap from "../components/home/Roadmap";
+import Operators from "../components/home/Operators";
 
 export default {
 	name: "Home",
 	components: {
+		Operators,
 		Roadmap,
 		RegisterDns,
 		ViewSite,

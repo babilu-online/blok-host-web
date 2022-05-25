@@ -3,12 +3,12 @@
 		<h2 class="mt-5">Upload</h2>
 
 		<div class="row mt-5">
-			<div class="col-8 offset-2">
+			<div class="col-12 col-lg-8 offset-lg-2">
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis consequuntur corporis earum eos eveniet expedita ipsa itaque molestias necessitatibus non obcaecati,
 					odit omnis perferendis praesentium quae quas, quisquam repudiandae tenetur!</p>
 			</div>
 
-			<div class="col-8 offset-2 mt-5">
+			<div class="col-12 col-lg-8 offset-lg-2 mt-5">
 
 				<!--			Uploader-->
 				<div class="text-start">

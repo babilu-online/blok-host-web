@@ -1,7 +1,7 @@
 <template>
 	<section id="view-site">
 
-		<div class="col-8 offset-2">
+		<div class="col-12 col-lg-8 offset-lg-2">
 			<div class="text-start mt-5">
 				<h4>STEP 3.</h4>
 				<p>View your site online</p>

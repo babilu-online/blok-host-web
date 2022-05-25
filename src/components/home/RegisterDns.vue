@@ -1,7 +1,7 @@
 <template>
 	<section id="dns">
 
-		<div class="col-8 offset-2 mt-5">
+		<div class="col-12 col-lg-8 offset-lg-2 mt-5">
 			<div class="text-start">
 				<h4>STEP 4. <sup class="fs-xs">(optional)</sup></h4>
 				<p>Register existing DNS to point to your site.</p>
@@ -9,7 +9,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-4 offset-2">
+			<div class="col-12 col-lg-4 offset-lg-2">
 				<div class="dns-example card h-100">
 					<div class="card-body pt-4">
 						<p>Record Type: <code>CNAME</code></p>
@@ -20,7 +20,7 @@
 				</div>
 			</div>
 
-			<div class="col-6 text-center">
+			<div class="col-12 col-lg-6 mt-5 mt-lg-0 text-center">
 
 				<h5><i class="fa fa-cloud"></i> <code>{{ `www.example.com` }}</code></h5>
 

@@ -9,7 +9,7 @@
 
 						<img class="footer-img" src="">
 					</div>
-					<div class="col">
+					<div class="col p-0 p-md-5">
 						<h5>BlokHost</h5>
 						<p>© 2022 BlokHost All Rights Reserved.</p>
 
@@ -25,7 +25,7 @@
 				</div>
 			</div>
 
-			<div class="col col-sm-12 col-md-6 text-center">
+			<div class="col col-sm-12 col-md-6 text-center p-5">
 				<div class="row mt-4">
 					<div class="col"><h6><a class="no-underline" href="#hero">Home</a></h6></div>
 					<div class="col"><h6><a class="no-underline" href="#features">Features</a></h6></div>
@@ -33,8 +33,9 @@
 				</div>
 				<div class="row mt-3">
 					<div class="col"><h6><a class="no-underline" href="#process">Process</a></h6></div>
+					<div class="col"><h6><a class="no-underline" href="#operators">Operators</a></h6></div>
 					<div class="col"><h6><a class="no-underline" href="#roadmap">Roadmap</a></h6></div>
-					<div class="col"><h6><a class="no-underline" href="#contact">Contact Us</a></h6></div>
+					<!--					<div class="col"><h6><a class="no-underline" href="#contact">Contact Us</a></h6></div>-->
 				</div>
 
 			</div>
