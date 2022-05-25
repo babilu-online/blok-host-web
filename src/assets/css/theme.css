@@ -14,7 +14,7 @@ html, body {
 	height: 32px;
 }
 
-.small.token-logo {
+.small .token-logo, .small.token-logo {
 	height: 1.2em;
 }
 
@@ -159,4 +159,8 @@ input.form-control:active::placeholder, input.form-control:focus::placeholder, t
 .form-control:disabled, .form-control[readonly] {
 	color: black;
 	background: rgba(255,255,255,0.2);
+}
+svg path {
+	stroke: white;
+	stroke-width: 18px;
 }

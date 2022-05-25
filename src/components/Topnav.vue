@@ -2,8 +2,7 @@
 	<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
 			<router-link class="navbar-brand" to="/explorer">
-				<!--						TODO LOGO-->
-				<img src="" height="40" class="d-inline-block align-top" alt="BlokHost">
+				<img src="/logo.svg"  height="40" class="d-inline-block align-top" alt="BlokHost"> <span class="fs-3">BLOK HOST</span>
 			</router-link>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

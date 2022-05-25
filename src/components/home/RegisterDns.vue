@@ -1,7 +1,6 @@
 <template>
 	<section id="dns">
-
-		<div class="col-12 col-lg-8 offset-lg-2 mt-5">
+		<div class="col-12 col-lg-8 offset-lg-2 my-5">
 			<div class="text-start">
 				<h4>STEP 4. <sup class="fs-xs">(optional)</sup></h4>
 				<p>Register existing DNS to point to your site.</p>

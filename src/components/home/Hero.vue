@@ -4,10 +4,18 @@
 		<div class="hero-container mb-5">
 			<div class="card hero-content p-lg-5">
 				<div class="card-body p-5">
-					<h1>Blok Host</h1>
-					<h2><span class="mover">{{word}}</span> Web Hosting</h2>
 
-					<p class="mt-3">Powered by the Solana blockchain & Shadow Drive Layer-2 Storage</p>
+					<div class="row">
+						<div class="col-auto me-3">
+							<img src="/logo.svg" alt="logo" height="125px">
+						</div>
+						<div class="col">
+							<h1>Blok Host</h1>
+							<h2><span class="mover">{{word}}</span> Web Hosting</h2>
+
+							<p class="mt-3">Powered by the Solana blockchain & Shadow Drive Layer-2 Storage</p>
+						</div>
+					</div>
 
 
 					<div class="col-12 col-lg-8 offset-lg-2 mt-5">
