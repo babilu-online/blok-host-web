@@ -1,5 +1,5 @@
 <template>
-	<section id="hero">
+	<section id="home">
 
 		<div class="hero-container mb-5">
 			<div class="card hero-content p-lg-5">
@@ -10,8 +10,10 @@
 							<img src="/logo.svg" alt="logo" height="125px">
 						</div>
 						<div class="col">
-							<h1>Blok Host</h1>
-							<h2><span><VueTyper eraseDelay="50" erase-style='backspace' class="text-white" pre-erase-delay='4000' shuffle="true" :text="words"></VueTyper></span>Web Hosting</h2>
+							<h1 class="text-primary">BLOK HOST</h1>
+							<h2><span><VueTyper :eraseDelay="50" caret-animation='smooth' erase-style='backspace' class="text-white" :pre-erase-delay='4000' :shuffle="true"
+									:text="words"></VueTyper></span>Web
+								Hosting</h2>
 							<p class="mt-3">Powered by the Solana blockchain & Shadow Drive Layer-2 Storage</p>
 						</div>
 					</div>
@@ -87,6 +89,11 @@ export default {
 </script>
 
 <style scoped>
+#hero {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
 .hero-container {
 	background: rgba(0, 0, 0, 0.8);
 }

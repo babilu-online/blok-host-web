@@ -1,5 +1,6 @@
 <template>
 	<section id="roadmap">
+		<div class="container">
 		<h2 class="mt-5 text-center">Roadmap</h2>
 
 		<div class="mt-5 row">
@@ -26,6 +27,7 @@
 			<div class="col-6 col-md-4 my-3">
 				<h3><i class="fa fa-chain"></i> Cross-Chain Compatibility</h3>
 				<p>Supporting contracts for other EVM chains (Ethereum, Fantom, Harmony, Avalanche).</p>
+			</div>
 			</div>
 		</div>
 

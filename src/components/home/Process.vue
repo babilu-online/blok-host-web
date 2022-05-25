@@ -1,5 +1,6 @@
 <template>
 	<section id="process">
+		<div class="container">
 		<div class="col-12 col-lg-8 offset-lg-2 mt-5">
 			<div class="text-start">
 				<h4>STEP 2.</h4>
@@ -68,8 +69,9 @@
 					</label>
 				</div>
 
-				<button :disabled="!termsAgreed" class="btn btn-outline-primary btn-lg mt-5 text-white">HOST SITE</button>
+				<button :disabled="!termsAgreed" class="btn btn-outline-light btn-lg mt-5 text-white">HOST SITE</button>
 			</div>
+		</div>
 		</div>
 	</section>
 </template>

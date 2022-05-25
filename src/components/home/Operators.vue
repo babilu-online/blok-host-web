@@ -1,5 +1,6 @@
 <template>
 <section id="operators">
+	<div class="container">
 	<h2 class="mt-5 text-center">Become An Operator</h2>
 
 	<div class="row">
@@ -45,6 +46,7 @@
 					<p>SHA: <i><code>0x0</code></i></p>
 				</div>
 			</div>
+		</div>
 		</div>
 	</div>
 

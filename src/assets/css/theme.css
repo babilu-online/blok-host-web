@@ -179,5 +179,13 @@ svg path {
 
 .vue-typer .custom.caret {
 	width: 10px;
-	background-color: #0084FF;
+	background-color: darkorange;
+}
+
+a.active {
+color: darkorange !important;
+}
+
+.text-primary {
+	color: darkorange !important;
 }

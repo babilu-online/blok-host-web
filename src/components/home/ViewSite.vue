@@ -1,5 +1,6 @@
 <template>
 	<section id="view-site">
+		<div class="container">
 
 		<div class="col-12 col-lg-8 offset-lg-2">
 			<div class="text-start mt-5">
@@ -12,12 +13,13 @@
 					<div v-if="loading">Loading your site, please wait</div>
 					<div v-else>
 						<p>Upload a site to view it</p>
-						<a href="#upload" class="btn btn-outline-primary">Upload</a>
+						<a href="#upload" class="btn btn-outline-light">Upload</a>
 					</div>
 
 				</div>
 				<iframe v-if="siteUri !== ''" :src="siteUri"></iframe>
 			</div>
+		</div>
 		</div>
 	</section>
 </template>

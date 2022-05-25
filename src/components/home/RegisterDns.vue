@@ -1,5 +1,6 @@
 <template>
 	<section id="dns">
+		<div class="container">
 		<div class="col-12 col-lg-8 offset-lg-2 my-5">
 			<div class="text-start">
 				<h4>STEP 4. <sup class="fs-xs">(optional)</sup></h4>
@@ -31,6 +32,7 @@
 
 				<h5><i class="fa fa-chain"></i> <code>{{ `Shadow Drive & Solana` }}</code></h5>
 			</div>
+		</div>
 		</div>
 	</section>
 </template>

@@ -1,5 +1,6 @@
 <template>
 	<section id="upload" class="text-center">
+		<div class="container">
 		<h2 class="mt-5">Getting Started</h2>
 
 		<div class="row mt-5">
@@ -38,6 +39,7 @@
 
 			</div>
 
+		</div>
 		</div>
 
 

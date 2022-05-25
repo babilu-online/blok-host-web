@@ -1,9 +1,13 @@
 <template>
 	<section id="features">
+		<div class="container">
+		<h2 class="text-center my-5">Features</h2>
+
 		<div class="row">
 			<div class="col-12 col-md-6 col-lg-3 mt-3 mt-lg-0" v-for="(feature,key) in features" :key="key">
 				<Feature :feature="feature"></Feature>
 			</div>
+		</div>
 		</div>
 	</section>
 </template>
