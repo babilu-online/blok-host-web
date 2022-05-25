@@ -150,7 +150,7 @@ export default {
 		}
 	},
 	mounted() {
-		this.getSOLPrice().then(resp => {
+		this.getSolPrice().then(resp => {
 			this.solPrice = resp.data.solana.usd;
 		})
 	}

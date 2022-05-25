@@ -30,6 +30,7 @@
     "vue-gtag": "^1.16.1",
     "vue-router": "^3.2.0",
     "vue-toastr": "^2.1.2",
+    "vue-typer": "^1.2.0",
     "vuex": "^3.4.0",
     "waypoints": "^4.0.1",
     "web3": "^1.5.2"

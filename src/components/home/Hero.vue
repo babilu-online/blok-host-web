@@ -11,8 +11,7 @@
 						</div>
 						<div class="col">
 							<h1>Blok Host</h1>
-							<h2><span class="mover">{{ word }}</span> Web Hosting</h2>
-
+							<h2><span><VueTyper eraseDelay="50" erase-style='backspace' class="text-white" pre-erase-delay='4000' shuffle="true" :text="words"></VueTyper></span>Web Hosting</h2>
 							<p class="mt-3">Powered by the Solana blockchain & Shadow Drive Layer-2 Storage</p>
 						</div>
 					</div>
@@ -57,8 +56,13 @@
 </template>
 
 <script>
+import {VueTyper} from "vue-typer"
+
 export default {
 	name: "Hero",
+	components: {
+		VueTyper,
+	},
 	data() {
 		return {
 			interval: null,

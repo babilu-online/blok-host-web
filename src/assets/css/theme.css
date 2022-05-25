@@ -164,3 +164,20 @@ svg path {
 	stroke: white;
 	stroke-width: 18px;
 }
+
+.vue-typer {
+	/*font-family: monospace;*/
+}
+
+.vue-typer .custom.char {
+	color: white;
+	/*background-color: #1E1E1E;*/
+}
+.vue-typer .custom.char.selected {
+	background-color: #264F78;
+}
+
+.vue-typer .custom.caret {
+	width: 10px;
+	background-color: #0084FF;
+}
