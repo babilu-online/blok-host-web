@@ -10,7 +10,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "home" */ '../views/Home')
     },
     {
-        path: '/',
+        path: '/upload',
+        name: 'Upload',
+        component: () => import(/* webpackChunkName: "home" */ '../views/UploadSite')
+    },
+    {
+        path: '/search',
         name: 'Search',
         component: () => import(/* webpackChunkName: "home" */ '../views/Search')
     },

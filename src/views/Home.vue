@@ -1,127 +1,174 @@
 <template>
-	<div class="home">
-		<Hero></Hero>
-		<div class="home-container">
-			<Features></Features>
-			<UploadSite></UploadSite>
-			<Process></Process>
-			<ViewSite></ViewSite>
-			<RegisterDns></RegisterDns>
-			<Operators></Operators>
-			<Roadmap></Roadmap>
+	<div class="home container">
+
+		<div class="row text-black">
+			<div class="col-auto">
+				<router-link to="/" class="sub-heading p-2">Overview</router-link>
+			</div>
+			<div class="col-auto">
+				<router-link to="/" class="sub-heading p-2">Sites</router-link>
+			</div>
+			<div class="col-auto">
+				<router-link to="/" class="sub-heading p-2">Builds</router-link>
+			</div>
+			<div class="col-auto">
+				<router-link to="/" class="sub-heading p-2">Domains</router-link>
+			</div>
+		</div>
+
+		<div class="row mt-4">
+			<div class="col-12">
+				<!--			Overvieww -->
+				<div class="card">
+					<div class="card-header mx-4">
+						<h1 class="text-start mt-3 mb-0">Overview</h1>
+					</div>
+					<div class="card-body">
+
+						<div class="row">
+
+							<div class="col-3 text-center">
+								<div class="overview-info">
+									<h5>Page Views</h5>
+									<h4>0</h4>
+								</div>
+							</div>
+							<div class="col-3 text-center">
+								<div class="overview-info">
+									<h5>Bandwidth Used</h5>
+									<h4>0 GB</h4>
+								</div>
+							</div>
+							<div class="col-3 text-center">
+								<div class="overview-info">
+									<h5>Cache Ratio</h5>
+									<h4>97%</h4>
+								</div>
+							</div>
+							<div class="col-3 text-center">
+								<div class="overview-info">
+									<h5>Build Minutes Used</h5>
+									<h4>0</h4>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row my-4">
+			<div class="col-7">
+				<div class="card">
+					<div class="card-header mx-4">
+						<div class="row mt-3">
+							<div class="col">
+								<h1 class="text-start mb-0">Sites</h1>
+							</div>
+							<div class="col-auto">
+								<router-link to="/upload" class="btn btn-primary">NEW SITE</router-link>
+							</div>
+						</div>
+					</div>
+					<div class="card-body">
+
+						<div class="text-center p-5" v-if="sites.length === 0">
+							<i class="info my-5">No sites created</i>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card">
+					<div class="card-header mx-4">
+						<h1 class="text-start mt-3 mb-0">Drives</h1>
+					</div>
+					<div class="card-body">
+
+						<div class="text-center p-5" v-if="drives.length === 0">
+							<i class="info my-5">No drives created</i>
+						</div>
+
+						<table class="table table-striped">
+							<tbody class="text-end">
+							<tr v-for="(drive, key) in drives" :key="key">
+								<td class="text-start">{{ drive.account.identifier }}</td>
+								<td>{{drive.account.creationEpoch}}</td>
+								<td>{{ new Date((1584368940 + ((drive.account.creationEpoch * 432000) * 511.36 / 1000)) * 1000).toDateString() }}</td>
+							</tr>
+							</tbody>
+						</table>
+
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-import Hero from "../components/home/Hero";
-import Features from "../components/home/Features";
-import Process from "../components/home/Process";
-import UploadSite from "../components/home/UploadSite";
-import ViewSite from "../components/home/ViewSite";
-import RegisterDns from "../components/home/RegisterDns";
-import Roadmap from "../components/home/Roadmap";
-import Operators from "../components/home/Operators";
+import {Shadow} from "../api/shadow";
 
 export default {
 	name: "Home",
-	components: {
-		Operators,
-		Roadmap,
-		RegisterDns,
-		ViewSite,
-		UploadSite,
-		Process,
-		Features,
-		Hero,
-	},
 	data() {
 		return {
-			lastKnownScrollPosition: 0,
-			ticking: false,
-			sections: [],
-			currentHash: window.location.hash,
+			shadow: null,
+			sites: [],
+			drives: [],
 		}
 	},
-	computed: {
-		//
+	watch: {
+		'$store.state.wallet_addr'() {
+			console.log("Wallet address changed", this.$store.state.wallet_addr);
+			this.onWalletConnected()
+		}
 	},
 	methods: {
-		//
-		onScroll: function () {
-			this.lastKnownScrollPosition = window.scrollY;
-			this.handleScroll()
+		async onWalletConnected() {
+			this.shadow = new Shadow();
+			await this.shadow.initDrive(this.$store.state.wallet_addr);
+			this.shadow.index().then(i => {
+				console.log("Index: ", i)
+				this.drives = i;
+			}).catch(e => {
+				console.log("Index err", e)
+			})
 		},
-
-		handleScroll: function () {
-			for (let i = 0; i < this.sections.length; i++) {
-				const hash = `#/${this.sections[i].id}`
-
-				if (this.checkVisible(this.sections[i])) {
-
-					if (this.currentHash === hash)
-						return;
-
-					console.log("Setting hash: ", hash)
-					this.currentHash = hash;
-					window.localStorage.setItem("hash", hash)
-					window.dispatchEvent(new CustomEvent('hashchange', {}));
-
-					return;
-				}
-			}
-		},
-
-		checkVisible: function (el) {
-			const position = el.getBoundingClientRect();
-			// checking for partial visibility
-			if (position.top < window.innerHeight && position.bottom >= 0) {
-				return true;
-			}
-			return false;
-		}
 	},
 	mounted() {
-		document.addEventListener('scroll', this.onScroll)
-		this.sections = [];
-
-		const htSections = document.getElementsByTagName("section");
-		for (let i = 0; i < htSections.length; i++) {
-			this.sections.push(htSections[i])
-		}
-
-		// this.sections = this.sections.reverse();
-	},
-	beforeDestroy() {
-		document.removeEventListener('scroll', this.onScroll)
+		if (this.$store.state.wallet_connected)
+			this.onWalletConnected();
 	}
 }
 </script>
 
 <style scoped>
-
-.home, .home-container {
-	color: white;
+.info {
+	color: lightgray;
 }
 
-h6 {
-	text-transform: uppercase;
+.overview-info {
+	border: 2px solid rgba(0, 0, 0, 0.05);
+	border-radius: 4px;
+	padding: 3%
 }
 
-link {
-	cursor: pointer;
+.sub-heading {
+	color: rgba(0, 0, 0, 0.6);
+	font-weight: bold;
+	text-decoration: none;
+	transition: all 0.3s ease-in-out;
 }
 
-section {
-	padding-top: 5%;
-	padding-bottom: 5%;
-}
-
-section {
-	background: black;
-}
-
-section:nth-child(2n) {
-	background: darkorange;
+.sub-heading:hover {
+	color: rgba(0, 0, 0, 1);
+	font-weight: bold;
+	text-decoration: underline;
 }
 </style>

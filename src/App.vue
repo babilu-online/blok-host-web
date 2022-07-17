@@ -1,7 +1,9 @@
 <template>
 	<div id="app">
 		<Topnav class="mb-3"></Topnav>
-		<router-view class="container-fluid"></router-view>
+		<div class="view">
+			<router-view class="container-fluid"></router-view>
+		</div>
 		<Footer></Footer>
 	</div>
 </template>

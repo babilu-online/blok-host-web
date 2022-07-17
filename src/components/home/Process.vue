@@ -7,66 +7,83 @@
 					<p>Register your site for hosting.</p>
 				</div>
 
-				<div class="col-12 col-lg-8 offset-lg-2 site-info text-center mt-5">
-					<div class="bordered p-3">
-						<h5>Permalink</h5>
-						<a class="fs-5 text-break" v-show="url !== ''" :href="url">{{ url }}</a>
-						<VueTyper :shuffle="true" :text="randomUrls"></VueTyper>
-					</div>
-				</div>
-
-				<HRText class="col-8 offset-2 my-3">OR</HRText>
-
-				<div class="text-center">
-
-					<div class="col-12 col-lg-8 offset-lg-2">
-						<div class="bordered p-3 text-center">
-							<h5>Custom Domain</h5>
-
-							<form @submit="searchDomain">
-								<div class="input-group">
-									<input required title="Three or more characters" :readonly="loading" pattern="[0-9A-Za-z]{3,32}" v-model="domainSearch" @keyup="onKeyUp" placeholder="Search URL"
-											class="form-control">
-									<button :disabled="loading" type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
-								</div>
-							</form>
-
-							<div v-show="searchResult.domain !== ''">
-								<div v-show="!isDomainAvailable" class="alert alert-warning mt-3 p-1">Name not available.</div>
-								<div v-show="isDomainAvailable" class="alert alert-success mt-3 p-1"><a :href="`//${domainSearch}.blok.host`">{{ domainSearch }}.blok.host</a> is available!</div>
-							</div>
-
+				<div v-show="false">
+					<div class="col-12 col-lg-8 offset-lg-2 site-info text-center mt-5">
+						<div class="bordered p-3">
+							<h5>Permalink</h5>
+							<a class="fs-5 text-break" v-show="url !== ''" :href="url">{{ url }}</a>
+							<VueTyper :shuffle="true" :text="randomUrls"></VueTyper>
 						</div>
 					</div>
 
-					<p class="fw-bold fs-4 mt-5 mb-1">
-						<SOL></SOL>
-						{{ solCost }} SOL <i>(~${{ usdCost }} USD)</i>
-					</p>
+					<HRText class="col-8 offset-2 my-3">OR</HRText>
 
-					<div class="small col-4 offset-4">
-						<table class="table table-sm text-white table-borderless">
-							<tbody>
-							<tr>
-								<td class="text-start">Domain</td>
-								<td>
-									<SOL class="small"></SOL>
-									{{ customDomainCost }} SOL
-								</td>
-							</tr>
-							<tr>
-								<td class="text-start">Gas</td>
-								<td>
-									<SOL class="small"></SOL>
-									{{ storeCost }} SOL
-								</td>
-							</tr>
-							</tbody>
-						</table>
+					<div class="text-center">
+
+						<div class="col-12 col-lg-8 offset-lg-2">
+							<div class="bordered p-3 text-center">
+								<h5>Custom Domain</h5>
+
+								<form @submit="searchDomain">
+									<div class="input-group">
+										<input required title="Three or more characters" :readonly="loading" pattern="[0-9A-Za-z]{3,32}" v-model="domainSearch" @keyup="onKeyUp"
+												placeholder="Search URL"
+												class="form-control">
+										<button :disabled="loading" type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+									</div>
+								</form>
+
+								<div v-show="searchResult.domain !== ''">
+									<div v-show="!isDomainAvailable" class="alert alert-warning mt-3 p-1">Name not available.</div>
+									<div v-show="isDomainAvailable" class="alert alert-success mt-3 p-1"><a :href="`//${domainSearch}.blok.host`">{{ domainSearch }}.blok.host</a> is available!</div>
+								</div>
+
+							</div>
+						</div>
 					</div>
+				</div>
 
+				<div class="row">
+					<div class="col-12 text-center">
+						<h3 class="text-uppercase">Hosting Cost</h3>
 
-					<div class="questions small mt-5">
+						<p class="fw-bold fs-4 mt-3 mb-0">
+							<SOL></SOL>
+							{{ solCost }} SOL
+						</p>
+					</div>
+				</div>
+
+				<div class="small col-4 offset-4">
+					<table class="table table-sm small text-white table-borderless">
+						<tbody>
+						<tr>
+							<td class="text-start">Domain Registration</td>
+							<td>
+								<SOL class="small"></SOL>
+								{{ customDomainCost }} SOL
+							</td>
+						</tr>
+						<tr>
+							<td class="text-start">Storage Cost</td>
+							<td>
+								<SOL class="small"></SOL>
+								{{ customDomainCost }} SOL
+							</td>
+						</tr>
+						<tr>
+							<td class="text-start">Gas Fee</td>
+							<td>
+								<SOL class="small"></SOL>
+								{{ storeCost }} SOL
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="row">
+					<div class="col-12 questions small mt-5 text-center">
 						<p :class="`${termsAgreed ? 'text-blue' : 'text-white'} small mb-1`"><span>I agree that this content is of legal origin & complies with my local laws:</span></p>
 						<label class="switch">
 							<input type="checkbox" v-model="termsAgreed">
@@ -74,8 +91,27 @@
 						</label>
 					</div>
 
-					<button :disabled="!termsAgreed" class="btn btn-outline-light btn-lg mt-5 text-white">HOST SITE</button>
+					<div v-if="!siteHosted" class="text-center col-12">
+						<button :disabled="!termsAgreed" class="btn btn-outline-light btn-lg mt-5 text-white" @click="onHostSite"> <span :style="loadingState"><i
+								class="fa fa-spinner fa-spin"></i></span> {{ loading ? 'HOSTING SITE' : 'HOST SITE' }}
+						</button>
+					</div>
+
+					<div v-if="siteHosted">
+						<div class="col-12 col-lg-8 offset-lg-2 site-info text-center mt-5">
+							<div class="bordered p-3">
+								<h5 class="mb-3">SITE HOSTED!</h5>
+								<a href="https://af8a6408523463441a997b4f900f7af9.blok.host/index.html"><VueTyper :repeat='0' :erase-on-complete="false"
+										text="https://af8a6408523463441a997b4f900f7af9.blok.host"></VueTyper></a>
+
+
+								<div class="mt-3"><a href="#view-site" class="btn btn-outline-light btn-lg">VIEW SITE</a></div>
+							</div>
+						</div>
+					</div>
+
 				</div>
+
 			</div>
 		</div>
 	</section>
@@ -102,6 +138,7 @@ export default {
 	data() {
 		return {
 			domainSearch: '',
+			siteHosted: false,
 			loading: false,
 			searchResult: {
 				domain: '',
@@ -187,6 +224,14 @@ export default {
 			return this.searchResult.available;
 		},
 
+		loadingState: function () {
+			if (this.loading) {
+				return {display: "inline-block"}
+			}
+
+			return {display: "none"}
+		},
+
 		customDomainCost: function () {
 			const slen = this.searchResult.domain.length;
 
@@ -205,6 +250,19 @@ export default {
 		}
 	},
 	methods: {
+
+		onHostSite: function () {
+			this.loading = true;
+			//TODO
+
+			setTimeout(() => {
+
+				this.siteHosted = true;
+				this.loading = false;
+				this.$emit("site-hosted", "https://af8a6408523463441a997b4f900f7af9.blok.host/index.html")
+			}, 2000)
+
+		},
 
 		generateRandomUrl: function () {
 			const custom = Math.floor(Math.random() * 2);
@@ -273,5 +331,11 @@ export default {
 
 .btn-outline-primary:not(:disabled) {
 	box-shadow: 0 0 30px rgb(10 159 185);
+}
+
+i.small {
+	font-size: 0.7em;
+	line-height: 0.7em;
+	color: grey;
 }
 </style>
