@@ -1,216 +1,135 @@
 <template>
-	<div class="home container">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h1 class="mt-5">BLOK HOST</h1>
 
-		<div class="row text-black">
-			<div class="col-auto">
-				<router-link to="/" class="sub-heading p-2">Overview</router-link>
-			</div>
-			<div class="col-auto">
-				<router-link to="/sites" class="sub-heading p-2">Sites</router-link>
-			</div>
-			<div class="col-auto">
-				<router-link to="/drives" class="sub-heading p-2">Drives</router-link>
-			</div>
-			<div class="col-auto">
-				<router-link to="/domains" class="sub-heading p-2">Domains</router-link>
+				<h2 class="my-5">Simple, Secure Web3 Hosting</h2>
 			</div>
 		</div>
 
-		<div class="row mt-4">
-			<div class="col-12">
-				<!--			Overvieww -->
-				<div class="card">
-					<div class="card-header mx-4">
-						<h2 class="text-start mt-3 mb-0">Overview</h2>
-					</div>
+		<div class="row text-center">
+			<div class="col-4">
+				<div :style="style()" class="card">
 					<div class="card-body">
-
-						<div class="row">
-
-							<div class="col-3 text-center">
-								<div class="overview-info">
-									<h5 class="text-start mb-2 ms-2">Page Views</h5>
-									<h2 class="mb-0">0</h2>
-								</div>
-							</div>
-							<div class="col-3 text-center">
-								<div class="overview-info">
-									<h5 class="text-start mb-2 ms-2">Bandwidth Used</h5>
-									<h2 class="mb-0">0 GB</h2>
-								</div>
-							</div>
-							<div class="col-3 text-center">
-								<div class="overview-info">
-									<h5 class="text-start mb-2 ms-2">Cache Ratio</h5>
-									<h2 class="mb-0">-</h2>
-								</div>
-							</div>
-							<div class="col-3 text-center">
-								<div class="overview-info">
-									<h5 class="text-start mb-2 ms-2">Build Minutes Used</h5>
-									<h2 class="mb-0">-</h2>
-								</div>
-							</div>
-
-						</div>
-
+						<h1>{{ fmt.format(stats.accounts_created) }}</h1>
+						<h5>ACCOUNTS CREATED</h5>
 					</div>
 				</div>
+			</div>
+
+			<div class="col-4">
+				<div :style="style()" class="card">
+					<div class="card-body">
+						<h1>{{ fmt.format(stats.sites_uploaded) }}</h1>
+						<h5>SITES HOSTED</h5>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-4">
+				<div :style="style()" class="card">
+					<div class="card-body">
+						<h1>{{ (stats.total_allocated / 1024 / 1024 / 1024 / 1024).toFixed(2) }} GB</h1>
+						<h5>DATA MONITORED</h5>
+					</div>
+				</div>
+			</div>
+
+			<!--			<div class="col text-black">-->
+			<!--				<h1>{{ fmt.format(node_stats.requests_served) }}</h1>-->
+			<!--				<h5>REQUESTS SERVED</h5>-->
+			<!--			</div>-->
+		</div>
+
+		<div class="row my-5">
+			<div class="col-12 col-md-8 col-lg-6 offset-0 offset-md-2 offset-lg-3">
+				<div :style="style()" class="card">
+					<div class="card-body" v-if="!$store.state.wallet_connected">
+						<h1>LOGIN</h1>
+
+						<div class="text-center">
+							<Phantom class="btn btn-outline-primary btn-lg"></Phantom>
+						</div>
+					</div>
+					<div class="card-body" v-if="$store.state.wallet_connected">
+						<h1 class="mb-3">GETTING STARTED</h1>
+
+						<p class="text-center">New & existing sites can be managed from the dashboard.</p>
+
+						<div class="text-center">
+							<router-link class="btn btn-outline-primary btn-lg" to="/dashboard">DASHBOARD</router-link>
+						</div>
+					</div>
+				</div>
+
+
 			</div>
 		</div>
 
 
-		<div class="row my-4">
-			<div class="col-7">
-				<div class="card h-100">
-					<div class="card-header mx-4">
-						<div class="row mt-3">
-							<div class="col">
-								<h2 class="text-start mb-0">Sites</h2>
-							</div>
-							<div class="col-auto">
-								<router-link to="/upload" class="btn btn-primary btn-sm">NEW SITE</router-link>
-							</div>
-						</div>
-					</div>
-					<div class="card-body">
+		<div class="text-black text-center my-5">
+			<a class="mx-2 nl" href="https://explorer.blok.host" target="_blank">Blok Explorer</a>
+			<a class="mx-2 nl" href="https://drive.blok.host" target="_blank">Drive Manager</a>
+		</div>
 
-						<div class="text-center p-5" v-if="sites.length === 0">
-							<i class="info my-5" v-if="loadingSites"><span><i class="fa fa-spinner fa-spin"></i></span> Loading sites...</i>
-							<i class="info my-5" v-if="!loadingSites">No sites created</i>
-						</div>
-
-
-						<SiteContainer @click="onSiteClick(site.meta.id)" v-for="(site, key) in sites" :key="key" :site="site"></SiteContainer>
-
-					</div>
-				</div>
-			</div>
-			<div class="col">
-				<div class="card h-100">
-					<div class="card-header mx-4">
-						<div class="row mt-3">
-							<div class="col">
-								<h2 class="text-start mb-0">Drives</h2>
-							</div>
-							<div class="col-auto">
-								<router-link to="/drives" class="btn btn-primary btn-sm">ALL DRIVES</router-link>
-							</div>
-						</div>
-					</div>
-					<div class="card-body">
-						<div class="text-center p-5" v-if="drives.length === 0">
-							<i class="info my-5" v-if="loadingDrives"><span><i class="fa fa-spinner fa-spin"></i></span> Loading drives...</i>
-							<i class="info my-5" v-if="!loadingDrives">No drives created</i>
-						</div>
-
-						<table class="table table-striped" v-if="drives.length > 0">
-							<thead>
-							<tr class="text-center">
-								<th class="text-start">Name</th>
-								<th>Epoch</th>
-								<th>Size</th>
-								<th>Created At</th>
-							</tr>
-							</thead>
-							<tbody class="text-end">
-							<tr v-for="(drive, key) in drives.slice(0,5)" :key="key">
-								<td class="text-start">{{ drive.account.identifier }}</td>
-								<td class="text-center">{{ drive.account.creationEpoch }}</td>
-								<td class="text-center">{{ (drive.account.storageAvailable / 1024 / 1024).toPrecision(2) }} MB</td>
-								<td>{{ new Date(drive.account.creationTime * 1000).toDateString() }}</td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+		<div class="text-center text-black mt-5">
+			<pre><code>{{ node_stats.checksum }}</code></pre>
+			<!--			<pre><code>{{ node_stats.uptime / 8.64e+13 }}</code></pre>-->
 		</div>
 	</div>
 </template>
 
 <script>
-import {Shadow} from "../api/shadow";
+import Phantom from "../components/Phantom";
 import {BlokHost} from "../api/blok_host";
-import SiteContainer from "../components/dashboard/SiteContainer";
 
 export default {
 	name: "Home",
-	components: {SiteContainer},
+	components: {Phantom},
 	data() {
 		return {
-			blokHost: null,
-			shadow: null,
-			sites: [],
-			drives: [],
-			loadingSites: false,
-			loadingDrives: false,
-		}
-	},
-	watch: {
-		'$store.state.wallet_addr'() {
-			console.log("Wallet address changed", this.$store.state.wallet_addr);
-			this.onWalletConnected()
+			stats: {},
+			node_stats: {},
+			fmt: new Intl.NumberFormat(),
 		}
 	},
 	methods: {
-		async onWalletConnected() {
-			this.shadow = new Shadow();
-			await this.shadow.initDrive(this.$store.state.wallet_addr);
-			this.siteIndex();
-			this.driveIndex();
-		},
-
-		driveIndex() {
-			this.loadingDrives = true;
-			this.shadow.index().then(i => {
-				console.log("Index: ", i)
-				this.drives = i;
-			}).catch(e => {
-				console.log("Index err", e)
-			}).finally(() => this.loadingDrives = false)
-		},
-
-		siteIndex() {
-			this.loadingSites = true;
-			this.blokHost.ownerSites(this.$store.state.wallet_addr).then(r => {
-				this.sites = r
-			}).finally(() => this.loadingSites = false)
-		},
-
-		onSiteClick: function (site) {
-			this.$router.push("/sites/" + site)
+		style: function() {
+			return {animationDelay: `${Math.random()}s`, animationDuration: `${Math.random() * 10}s`}
 		}
 	},
 	mounted() {
-		this.blokHost = new BlokHost()
-		if (this.$store.state.wallet_connected)
-			this.onWalletConnected();
+		new BlokHost().shadowStats().then(r => {
+			this.stats = r.data
+		})
+		new BlokHost().nodeStats().then(r => {
+			this.node_stats = r.data
+		})
 	}
 }
 </script>
 
 <style scoped>
-.info {
-	color: lightgray;
+.card {
+	padding: 5px;
+	background: linear-gradient(90deg, rgba(251, 176, 59, 1) 0%, rgba(212, 20, 90, 1) 100%);
+	background-size: 400% 400%;
+	animation: gradient 3s ease infinite;
 }
 
-.overview-info {
-	border: 2px solid rgba(0, 0, 0, 0.05);
-	border-radius: 4px;
-	padding: 3%
+.card-body {
+	border-radius: 3px;
+	background: white;
 }
 
-.sub-heading {
-	color: rgba(0, 0, 0, 0.6);
+.nl {
+	text-transform: uppercase;
 	font-weight: bold;
-	text-decoration: none;
-	transition: all 0.3s ease-in-out;
+	color: grey;
 }
 
-.sub-heading:hover {
-	color: rgba(0, 0, 0, 1);
-	font-weight: bold;
-	text-decoration: underline;
+.nl:hover {
+	color: darkgray;
 }
 </style>

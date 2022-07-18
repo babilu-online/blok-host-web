@@ -10,7 +10,7 @@
 						<img class="footer-img" src="">
 					</div>
 					<div class="col p-0 p-md-5">
-						<h5>BlokHost</h5>
+						<h1 class="text-white text-start mt-0">BlokHost</h1>
 						<p>© 2022 BlokHost All Rights Reserved.</p>
 
 						<div class="row">

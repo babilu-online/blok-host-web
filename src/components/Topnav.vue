@@ -13,8 +13,11 @@
 					<li class="nav-item">
 						<NavRouterLink link="home" title="Home" :active-hash="hash"></NavRouterLink>
 					</li>
-					<li class="nav-item">
-						<NavRouterLink link="sites" title="sites" :active-hash="hash"></NavRouterLink>
+				</ul>
+
+				<ul class="navbar-nav mx-auto mb-lg-0">
+					<li class="nav-item" v-if="$store.state.wallet_connected">
+						<NavRouterLink link="dashboard" title="dashboard" :active-hash="hash"></NavRouterLink>
 					</li>
 				</ul>
 
