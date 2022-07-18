@@ -38,7 +38,7 @@
 			</div>
 		</div>
 
-		<div class="row mt-4">
+		<div class="row my-4">
 
 			<div class="col-6">
 				<div class="card">

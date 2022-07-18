@@ -42,13 +42,13 @@
 							<div class="col-3 text-center">
 								<div class="overview-info">
 									<h5 class="text-start mb-2 ms-2">Cache Ratio</h5>
-									<h2 class="mb-0">97%</h2>
+									<h2 class="mb-0">-</h2>
 								</div>
 							</div>
 							<div class="col-3 text-center">
 								<div class="overview-info">
 									<h5 class="text-start mb-2 ms-2">Build Minutes Used</h5>
-									<h2 class="mb-0">0</h2>
+									<h2 class="mb-0">-</h2>
 								</div>
 							</div>
 
