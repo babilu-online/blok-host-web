@@ -86,8 +86,6 @@ export default {
 			}
 
 			this.uploadedFiles.push(pendingFile)
-
-			this.$emit("upload", pendingFile)
 		},
 	},
 	mounted() {

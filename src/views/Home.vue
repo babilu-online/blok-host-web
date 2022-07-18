@@ -6,13 +6,13 @@
 				<router-link to="/" class="sub-heading p-2">Overview</router-link>
 			</div>
 			<div class="col-auto">
-				<router-link to="/" class="sub-heading p-2">Sites</router-link>
+				<router-link to="/sites" class="sub-heading p-2">Sites</router-link>
 			</div>
 			<div class="col-auto">
-				<router-link to="/" class="sub-heading p-2">Builds</router-link>
+				<router-link to="/drives" class="sub-heading p-2">Drives</router-link>
 			</div>
 			<div class="col-auto">
-				<router-link to="/" class="sub-heading p-2">Domains</router-link>
+				<router-link to="/domains" class="sub-heading p-2">Domains</router-link>
 			</div>
 		</div>
 
@@ -21,7 +21,7 @@
 				<!--			Overvieww -->
 				<div class="card">
 					<div class="card-header mx-4">
-						<h1 class="text-start mt-3 mb-0">Overview</h1>
+						<h2 class="text-start mt-3 mb-0">Overview</h2>
 					</div>
 					<div class="card-body">
 
@@ -29,26 +29,26 @@
 
 							<div class="col-3 text-center">
 								<div class="overview-info">
-									<h5>Page Views</h5>
-									<h4>0</h4>
+									<h5 class="text-start mb-2 ms-2">Page Views</h5>
+									<h2 class="mb-0">0</h2>
 								</div>
 							</div>
 							<div class="col-3 text-center">
 								<div class="overview-info">
-									<h5>Bandwidth Used</h5>
-									<h4>0 GB</h4>
+									<h5 class="text-start mb-2 ms-2">Bandwidth Used</h5>
+									<h2 class="mb-0">0 GB</h2>
 								</div>
 							</div>
 							<div class="col-3 text-center">
 								<div class="overview-info">
-									<h5>Cache Ratio</h5>
-									<h4>97%</h4>
+									<h5 class="text-start mb-2 ms-2">Cache Ratio</h5>
+									<h2 class="mb-0">97%</h2>
 								</div>
 							</div>
 							<div class="col-3 text-center">
 								<div class="overview-info">
-									<h5>Build Minutes Used</h5>
-									<h4>0</h4>
+									<h5 class="text-start mb-2 ms-2">Build Minutes Used</h5>
+									<h2 class="mb-0">0</h2>
 								</div>
 							</div>
 
@@ -62,48 +62,66 @@
 
 		<div class="row my-4">
 			<div class="col-7">
-				<div class="card">
+				<div class="card h-100">
 					<div class="card-header mx-4">
 						<div class="row mt-3">
 							<div class="col">
-								<h1 class="text-start mb-0">Sites</h1>
+								<h2 class="text-start mb-0">Sites</h2>
 							</div>
 							<div class="col-auto">
-								<router-link to="/upload" class="btn btn-primary">NEW SITE</router-link>
+								<router-link to="/upload" class="btn btn-primary btn-sm">NEW SITE</router-link>
 							</div>
 						</div>
 					</div>
 					<div class="card-body">
 
 						<div class="text-center p-5" v-if="sites.length === 0">
-							<i class="info my-5">No sites created</i>
+							<i class="info my-5" v-if="loadingSites"><span><i class="fa fa-spinner fa-spin"></i></span> Loading sites...</i>
+							<i class="info my-5" v-if="!loadingSites">No sites created</i>
 						</div>
 
+
+						<SiteContainer @click="onSiteClick(site.meta.id)" v-for="(site, key) in sites" :key="key" :site="site"></SiteContainer>
 
 					</div>
 				</div>
 			</div>
 			<div class="col">
-				<div class="card">
+				<div class="card h-100">
 					<div class="card-header mx-4">
-						<h1 class="text-start mt-3 mb-0">Drives</h1>
+						<div class="row mt-3">
+							<div class="col">
+								<h2 class="text-start mb-0">Drives</h2>
+							</div>
+							<div class="col-auto">
+								<router-link to="/drives" class="btn btn-primary btn-sm">ALL DRIVES</router-link>
+							</div>
+						</div>
 					</div>
 					<div class="card-body">
-
 						<div class="text-center p-5" v-if="drives.length === 0">
-							<i class="info my-5">No drives created</i>
+							<i class="info my-5" v-if="loadingDrives"><span><i class="fa fa-spinner fa-spin"></i></span> Loading drives...</i>
+							<i class="info my-5" v-if="!loadingDrives">No drives created</i>
 						</div>
 
-						<table class="table table-striped">
+						<table class="table table-striped" v-if="drives.length > 0">
+							<thead>
+							<tr class="text-center">
+								<th class="text-start">Name</th>
+								<th>Epoch</th>
+								<th>Size</th>
+								<th>Created At</th>
+							</tr>
+							</thead>
 							<tbody class="text-end">
-							<tr v-for="(drive, key) in drives" :key="key">
+							<tr v-for="(drive, key) in drives.slice(0,5)" :key="key">
 								<td class="text-start">{{ drive.account.identifier }}</td>
-								<td>{{drive.account.creationEpoch}}</td>
-								<td>{{ new Date((1584368940 + ((drive.account.creationEpoch * 432000) * 511.36 / 1000)) * 1000).toDateString() }}</td>
+								<td class="text-center">{{ drive.account.creationEpoch }}</td>
+								<td class="text-center">{{ (drive.account.storageAvailable / 1024 / 1024).toPrecision(2) }} MB</td>
+								<td>{{ new Date(drive.account.creationTime * 1000).toDateString() }}</td>
 							</tr>
 							</tbody>
 						</table>
-
 					</div>
 				</div>
 			</div>
@@ -113,14 +131,20 @@
 
 <script>
 import {Shadow} from "../api/shadow";
+import {BlokHost} from "../api/blok_host";
+import SiteContainer from "../components/dashboard/SiteContainer";
 
 export default {
 	name: "Home",
+	components: {SiteContainer},
 	data() {
 		return {
+			blokHost: null,
 			shadow: null,
 			sites: [],
 			drives: [],
+			loadingSites: false,
+			loadingDrives: false,
 		}
 	},
 	watch: {
@@ -133,15 +157,33 @@ export default {
 		async onWalletConnected() {
 			this.shadow = new Shadow();
 			await this.shadow.initDrive(this.$store.state.wallet_addr);
+			this.siteIndex();
+			this.driveIndex();
+		},
+
+		driveIndex() {
+			this.loadingDrives = true;
 			this.shadow.index().then(i => {
 				console.log("Index: ", i)
 				this.drives = i;
 			}).catch(e => {
 				console.log("Index err", e)
-			})
+			}).finally(() => this.loadingDrives = false)
 		},
+
+		siteIndex() {
+			this.loadingSites = true;
+			this.blokHost.ownerSites(this.$store.state.wallet_addr).then(r => {
+				this.sites = r
+			}).finally(() => this.loadingSites = false)
+		},
+
+		onSiteClick: function (site) {
+			this.$router.push("/sites/" + site)
+		}
 	},
 	mounted() {
+		this.blokHost = new BlokHost()
 		if (this.$store.state.wallet_connected)
 			this.onWalletConnected();
 	}

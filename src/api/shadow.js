@@ -1,5 +1,6 @@
 // import {ShdwDrive} from "@alphabatem/metaplex-shadow-drive";
 import {ShdwDrive} from "@cloakd/shadow-drive";
+// import {ShdwDrive} from "@shadow-drive/sdk";
 import {PhantomWalletAdapter} from '@solana/wallet-adapter-wallets';
 import axios from 'axios'
 import {BN, web3} from "@project-serum/anchor";
@@ -57,16 +58,9 @@ export class Shadow {
 		const v2Accs = await this.drive.getStorageAccounts("v2")
 
 		for (let i = 0; i < v2Accs.length; i++) {
-			console.log("Getting info: %v", v2Accs[i].publicKey)
-
 			try {
-				this.driveInfo(v2Accs[i].publicKey).then((info) => {
-
-					v2Accs[i].account = Object.assign(v2Accs[i].account, info.data)
-					console.log("Info: ", v2Accs[i])
-				}).catch(e => {
-					console.error("Unable to get drive", v2Accs[i], e)
-				})
+				const info = await this.driveInfo(v2Accs[i].publicKey)
+				v2Accs[i].account = Object.assign(v2Accs[i].account, info.data)
 			} catch (e) {
 				console.log("e", e)
 			}

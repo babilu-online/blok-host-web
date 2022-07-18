@@ -135,8 +135,12 @@ export default {
 
 			const drive = await this.onDriveCreate({
 				name: `blok_host_` + new Date().toISOString().slice(0, -8),
-				size: this.uploadSize,
+				size: Math.ceil(this.uploadSize / 1024),
 				denom: "B"
+			}).catch(e => {
+				console.error("Drive create error: ", e)
+			}).finally(() => {
+				this.loading = false
 			})
 
 			if (!drive) {

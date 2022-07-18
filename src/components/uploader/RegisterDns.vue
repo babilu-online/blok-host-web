@@ -41,7 +41,6 @@
 					<button class="btn btn-primary px-5 py-2" @click="onDone">NEXT</button>
 				</div>
 			</div>
-
 		</div>
 	</section>
 </template>
