@@ -100,7 +100,7 @@ export default {
 	},
 	methods: {
 		style: function() {
-			return {animationDelay: `${Math.random()}s`, animationDuration: `${Math.random() * 10}s`}
+			return {animationDelay: `${ Math.floor(Math.random() * 2)}s`, animationDuration: `${(Math.floor(Math.random() * 10))+1}s`}
 		}
 	},
 	mounted() {
