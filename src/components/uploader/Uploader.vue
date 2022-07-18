@@ -5,7 +5,7 @@
 		<UploadSite v-if="step === 1" @upload="onUpload" ></UploadSite>
 		<!--		<Process v-if="step === 1" @site-hosted="onHosted"></Process>-->
 		<RegisterDns :drive="site.driveID" v-if="step === 2" @done="onDNSDone"></RegisterDns>
-		<ViewSite :siteUri="site.url" v-if="step === null"></ViewSite>
+		<ViewSite :drive="site.driveID" :siteUri="site.url" v-if="step === null"></ViewSite>
 	</div>
 </template>
 

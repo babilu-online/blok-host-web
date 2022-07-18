@@ -23,7 +23,7 @@
 
 					<div class="mt-5">
 						<a target="_blank" :href="siteUri" class="btn btn-primary py-3 px-5 fw-bold">VIEW SITE</a>
-						<router-link :to="`/sites/${driveID}`" class="btn btn-outline-primary py-3 px-5 fw-bold ms-3">DASHBOARD</router-link>
+						<router-link :to="`/sites/${drive}`" class="btn btn-outline-primary py-3 px-5 fw-bold ms-3">DASHBOARD</router-link>
 					</div>
 
 				</div>
@@ -40,8 +40,9 @@ export default {
 	name: "ViewSite",
 	components: {VueTyper},
 	props: {
-		driveID: {
+		drive: {
 			type: String,
+			required: true,
 		},
 		siteUri: {
 			type: String,

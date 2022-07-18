@@ -18,7 +18,7 @@
 
 						<div class="row">
 							<div class="col ms-2">
-								<h2 class="mb-0">{{site.meta.site_name}}</h2>
+								<h2 class="mb-0">{{siteName}}</h2>
 
 								<a target="_blank" :href="`https://${site.subdomain}.blok.host`"><p class="small">https://{{site.subdomain}}.blok.host</p></a>
 
@@ -30,7 +30,7 @@
 
 							</div>
 							<div class="col-auto">
-								<img :src="site.meta.image" alt="site image" class="img-fluid">
+								<img :src="siteImage" alt="site image" class="img-fluid">
 							</div>
 						</div>
 					</div>
@@ -120,6 +120,20 @@ export default {
 			this.onWalletConnected()
 		}
 	},
+	computed: {
+		siteName: function() {
+			if (!this.site.meta)
+				return "Unknown"
+
+			return this.site.meta.site_name
+		},
+		siteImage: function() {
+			if (!this.site.meta)
+				return ""
+
+			return this.site.meta.image
+		}
+	},
 	methods: {
 		async onWalletConnected() {
 			this.shadow = new Shadow();
@@ -138,12 +152,18 @@ export default {
 		siteShow() {
 			this.loading = true;
 			this.blokHost.ownerSite(this.$store.state.wallet_addr, this.$route.params.id).then(r => {
+				if (!r)
+					return
+
 				this.site = r
 			}).finally(() => this.loading = false)
 		},
 	},
 	mounted() {
 		this.blokHost = new BlokHost()
+		this.blokHost.pingBlokHost(this.$route.params.id)
+		this.siteShow()
+
 		if (this.$store.state.wallet_connected)
 			this.onWalletConnected();
 	}

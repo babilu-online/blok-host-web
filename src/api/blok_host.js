@@ -49,4 +49,11 @@ export class BlokHost {
 	nodeStats() {
 		return axios.get(`${this.base}/stats`)
 	}
+
+
+	pingBlokHost(drive) {
+		return axios.post("https://webhost2.alphabatem.com/cid/register", {
+			address: drive,
+		})
+	}
 }
