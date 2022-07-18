@@ -40,6 +40,9 @@
 			<!--				<h1>{{ fmt.format(node_stats.requests_served) }}</h1>-->
 			<!--				<h5>REQUESTS SERVED</h5>-->
 			<!--			</div>-->
+			<div class="col-12 text-end">
+				<span class="small updated-at">Last Updated: {{tn.toLocaleTimeString()}}</span>
+			</div>
 		</div>
 
 		<div class="row my-5">
@@ -89,6 +92,7 @@ export default {
 	components: {Phantom},
 	data() {
 		return {
+			tn: new Date(),
 			stats: {},
 			node_stats: {},
 			fmt: new Intl.NumberFormat(),
@@ -121,6 +125,12 @@ export default {
 .card-body {
 	border-radius: 3px;
 	background: white;
+}
+
+.updated-at {
+	font-family: monospace;
+	font-size: 0.8em;
+	color: grey;
 }
 
 .nl {
