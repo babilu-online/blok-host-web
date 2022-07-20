@@ -15,7 +15,7 @@
 					<div class="card-body pt-4">
 						<p>Record Type: <code>CNAME</code></p>
 						<p>Name: <code>{{ `www.example.com` }}</code></p>
-						<p>Value: <code>{{ `af8a6408523463441a997b4f900f7af9.blok.host` }}</code></p>
+						<p>Value: <code>{{ driveUri }}</code></p>
 						<p>TTL: <code>3600</code></p>
 					</div>
 				</div>
